@@ -1,0 +1,1 @@
+module libNfcNativeHelper { explicit module libNfcNativeHelper { header "NfcNativeHelper.h" } }
