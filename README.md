@@ -1,25 +1,22 @@
-# NativeScript NFC plugin
+<div align="center">
+  
+  # NativeScript NFC Plugin
 
-[![Build Status][build-status]][build-url]
-[![NPM version][npm-image]][npm-url]
-[![Downloads][downloads-image]][npm-url]
-[![Twitter Follow][twitter-image]][twitter-url]
+  [![Static Badge](https://img.shields.io/badge/Ontrack-The_Smarter_Works_Management_Solution-B1BF21)][2]
 
-[build-status]:https://travis-ci.org/EddyVerbruggen/nativescript-nfc.svg?branch=master
-[build-url]:https://travis-ci.org/EddyVerbruggen/nativescript-nfc
-[npm-image]:http://img.shields.io/npm/v/nativescript-nfc.svg
-[npm-url]:https://npmjs.org/package/nativescript-nfc
-[downloads-image]:http://img.shields.io/npm/dm/nativescript-nfc.svg
-[twitter-image]:https://img.shields.io/twitter/follow/eddyverbruggen.svg?style=social&label=Follow%20me
-[twitter-url]:https://twitter.com/eddyverbruggen
+  [![NPM](https://img.shields.io/npm/v/%40ontrackms%2Fnativescript-nfc)][0]
+  ![Test Workflow](https://github.com/ontrackms/nativescript-nfc/actions/workflows/test.yml/badge.svg)
+  [![GitHub License](https://img.shields.io/github/license/ontrackms/nativescript-nfc)][1]
 
-<img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-nfc/master/screenshots/ios-demo-before-scan.PNG" width="180px" height="320px"/> <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-nfc/master/screenshots/ios-demo-after-scan.PNG" width="180px" height="320px"/> <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-nfc/master/screenshots/android-demo.png" width="180px" height="320px"/>
+  NativeScript plugin to discover, read, and write NFC tags
+
+</div>
 
 ## Installation
 From the command prompt go to your app's root folder and execute:
 
 ```
-tns plugin add nativescript-nfc
+npm i @ontrackms/nativescript-nfc
 ```
 
 ## iOS Setup
@@ -85,7 +82,7 @@ Not all devices have an NFC chip we can tap in to (and on iOS you need to build 
 ##### JavaScript
 ```js
 // require the plugin
-var Nfc = require("nativescript-nfc").Nfc;
+var Nfc = require("@ontrackms/nativescript-nfc").Nfc;
 
 // instantiate the plugin
 var nfc = new Nfc();
@@ -100,7 +97,7 @@ nfc.available().then(
 ##### TypeScript
 ```typescript
 // require the plugin
-import { Nfc } from "nativescript-nfc";
+import { Nfc } from "@ontrackms/nativescript-nfc";
 
 // instantiate the plugin
 let nfc = new Nfc();
@@ -134,7 +131,7 @@ You may want to get notified when an Ndef tag was discovered. You can pass in a 
 
 Note that blank/erased NFC tags are not returned here, but through `setOnTagDiscoveredListener` instead.
 
-See the [definition of NfcNdefData](https://github.com/EddyVerbruggen/nativescript-nfc/blob/master/nfc.common.d.ts#L27-L33) to learn what is returned to the callback function.
+See the [definition of NfcNdefData](https://github.com/ontrackms/nativescript-nfc/blob/master/nfc.common.d.ts#L27-L33) to learn what is returned to the callback function.
 
 For iOS you can pass in these options (see the TypeScript example below):
 * `stopAfterFirstRead: boolean` (default `false`): don't continue scanning after a tag was read. 
@@ -153,7 +150,7 @@ nfc.setOnNdefDiscoveredListener(function(data) {
 
 ##### TypeScript
 ```typescript
-import { NfcNdefData } from "nativescript-nfc";
+import { NfcNdefData } from "@ontrackms/nativescript-nfc";
 
 nfc.setOnNdefDiscoveredListener((data: NfcNdefData) => {
   // data.message is an array of records, so:
@@ -188,7 +185,7 @@ You can pass in a callback function that gets invoked when that is the case.
 Note that Ndef tags (which you may have previously written data to) are not returned here,
 but through `setOnNdefDiscoveredListener` instead.
 
-See the [definition of NfcTagData](https://github.com/EddyVerbruggen/nativescript-nfc/blob/master/nfc.common.d.ts#L14-L17) to learn what is returned to the callback function.
+See the [definition of NfcTagData](https://github.com/ontrackms/nativescript-nfc/blob/master/nfc.common.d.ts#L14-L17) to learn what is returned to the callback function.
 
 ##### JavaScript
 ```js
@@ -203,7 +200,7 @@ nfc.setOnTagDiscoveredListener(function(data) {
 
 ##### TypeScript
 ```typescript
-import { NfcTagData } from "nativescript-nfc";
+import { NfcTagData } from "@ontrackms/nativescript-nfc";
 
 nfc.setOnTagDiscoveredListener((data: NfcTagData) => {
   console.log("Discovered a tag with ID " + data.id);  
@@ -224,7 +221,7 @@ nfc.setOnTagDiscoveredListener(null).then(() => {
 ### `writeTag` (Android only)
 You can write to a tag as well with this plugin. At the moment you can write either plain text or a Uri. The latter will launch the browser on an Android device if the tag is scanned (unless an app handling Ndef tags itself is active at that moment, like an app with this plugin - so just close the app to test this feature).
 
-Note that you can write multiple items to an NFC tag so the input is an object with Arrays of various types (`textRecord` and `uriRecord` are currently supported). See the [TypeScript definition](https://github.com/EddyVerbruggen/nativescript-nfc/blob/master/nfc.common.d.ts#L10-L13) for details, but these examples should get you going:
+Note that you can write multiple items to an NFC tag so the input is an object with Arrays of various types (`textRecord` and `uriRecord` are currently supported). See the [TypeScript definition](https://github.com/ontrackms/nativescript-nfc/blob/master/nfc.common.d.ts#L10-L13) for details, but these examples should get you going:
 
 ##### Writing 2 textRecords in JavaScript
 ```js

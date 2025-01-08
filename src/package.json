@@ -1,7 +1,7 @@
 {
   "name": "@ontrackms/nativescript-nfc",
-  "version": "1.0.2",
-  "description": "NFC plugin for your NativeScript app",
+  "version": "1.0.3",
+  "description": "NativeScript plugin to discover, read, and write NFC tags",
   "main": "nfc",
   "typings": "index.d.ts",
   "nativescript": {
@@ -29,7 +29,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ontrackms/nativescript-dotenv.git"
+    "url": "https://github.com/ontrackms/nativescript-nfc.git"
   },
   "keywords": [
     "ecosystem:NativeScript",
@@ -43,11 +43,17 @@
     "name": "Eddy Verbruggen",
     "email": "eddyverbruggen@gmail.com"
   },
+  "contributors": [
+    {
+      "name": "Ian Brindley",
+      "email": "ian.brindley@ontrackms.com"
+    }
+  ],
   "bugs": {
-    "url": "https://github.com/EddyVerbruggen/nativescript-nfc/issues"
+    "url": "https://github.com/ontrackms/nativescript-nfc/issues"
   },
   "license": "MIT",
-  "homepage": "https://github.com/EddyVerbruggen/nativescript-nfc",
+  "homepage": "https://github.com/ontrackms/nativescript-nfc",
   "readmeFilename": "README.md",
   "devDependencies": {
     "@nativescript/android": "8.5.0",
