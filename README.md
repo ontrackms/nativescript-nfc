@@ -5,7 +5,6 @@
   [![Static Badge](https://img.shields.io/badge/Ontrack-The_Smarter_Works_Management_Solution-B1BF21)][2]
 
   [![NPM](https://img.shields.io/npm/v/%40ontrackms%2Fnativescript-nfc)][0]
-  ![Test Workflow](https://github.com/ontrackms/nativescript-nfc/actions/workflows/test.yml/badge.svg)
   [![GitHub License](https://img.shields.io/github/license/ontrackms/nativescript-nfc)][1]
 
   NativeScript plugin to discover, read, and write NFC tags
@@ -29,104 +28,31 @@ Also, add this to your `App_Resources/iOS/app.entitlements` (mind the name!) fil
 <array>
 	<string>NDEF</string>
 </array>
-``` 
-
-The [demo app](demo) has this:
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>com.apple.developer.nfc.readersession.formats</key>
-	<array>
-		<string>NDEF</string>
-	</array>
-</dict>
-</plist>
 ```
 
-## Android Setup
-> ⚠️ Since plugin version 4.0.0 this section is no longer needed, but you'll  HAVE to run NativeScript 5.4.0 or newer. If you're using an older NativeScript, please stick to a plugin version < 4.0.0.
-
-Update the `activity` entry in your `App_Resources/Android/AndroidManifest.xml` file:
-
-```xml
-<activity
-        android:name="com.tns.NativeScriptNfcActivity"
-        android:label="@string/title_activity_kimera"
-        android:configChanges="keyboardHidden|orientation|screenSize">
-``` 
-
-So replace `com.tns.NativeScriptActivity` with `com.tns.NativeScriptNfcActivity`.
-
-#### Webpack (again, no longer needed from plugin version 4.0.0)
-If you're using Webpack to bundle your app you'll need to add 1 line of configuration in case you're targeting Android.
-
-- Open `webpack.config.js` (it's in the root of your project).
-- Look for an Array named `appComponents`, which likely contains stuff like `"tns-core-modules/ui/frame"`.
-- Add `resolve(__dirname, "node_modules/nativescript-nfc/nfc-activity.android.js")` [as shown here](https://github.com/EddyVerbruggen/nativescript-nfc/blob/6dfa0ff4f77cab5ab7f494ac3055f728ce51d131/demo/webpack.config.js#L17).
-
-## Demo app (those screenshots above)
-Want to dive in quickly? Check out [the demo](https://github.com/EddyVerbruggen/nativescript-nfc/tree/master/demo)!
-
-You can run the demo app from the root of the project by typing `npm run demo.ios.device` or `npm run demo.android`.
-
-> [This is what it looks like in action on iOS](https://twitter.com/eddyverbruggen/status/899617497741185025)!
+## Usage
+```js
+import { Nfc } from '@ontrackms/nativescript-nfc';
+const Nfc = new Nfc();
+```
 
 ## API
 
-### `available`
+### `Nfc.available`
 Not all devices have an NFC chip we can tap in to (and on iOS you need to build with Xcode 9+), so check this beforehand:
 
-##### JavaScript
-```js
-// require the plugin
-var Nfc = require("@ontrackms/nativescript-nfc").Nfc;
-
-// instantiate the plugin
-var nfc = new Nfc();
-
-nfc.available().then(
-  function(avail) {
-    console.log(avail ? "Yes" : "No");
-  }
-);
-```
-
-##### TypeScript
 ```typescript
-// require the plugin
-import { Nfc } from "@ontrackms/nativescript-nfc";
-
-// instantiate the plugin
-let nfc = new Nfc();
-
-nfc.available().then((avail) => {
-    console.log(avail ? "Yes" : "No");
-});
+available(): Promise<boolean>
 ```
 
-### `enabled`
+### `Nfc.enabled`
 A device may have an NFC chip, but it needs to be turned on ✅ in order to be available for this plugin. So if `available` returns `true` and `enabled` returns `false` you should prompt the user to turn NFC on in the device settings.
 
-##### JavaScript
-```js
-nfc.enabled().then(
-  function(on) {
-    console.log(on ? "Yes" : "No");
-  }
-);
-```
-
-##### TypeScript
 ```typescript
-nfc.enabled().then((on) => {
-    console.log(on ? "Yes" : "No");
-});
+enabled(): Promise<boolean>
 ```
 
-### `setOnNdefDiscoveredListener`
+### `Nfc.setOnNdefDiscoveredListener`
 You may want to get notified when an Ndef tag was discovered. You can pass in a callback function that gets invoked when that is the case.
 
 Note that blank/erased NFC tags are not returned here, but through `setOnTagDiscoveredListener` instead.
@@ -137,15 +63,8 @@ For iOS you can pass in these options (see the TypeScript example below):
 * `stopAfterFirstRead: boolean` (default `false`): don't continue scanning after a tag was read. 
 * `scanHint: string` (default `undefined`): Show a little hint in the scan UI.
 
-##### JavaScript
 ```js
-nfc.setOnNdefDiscoveredListener(function(data) {
-    // see the TypeScript example below
-}).then(
-  function() {
-    console.log("OnNdefDiscovered listener added");
-  }
-);
+setOnNdefDiscoveredListener(callback: (data: NfcNdefData) => void, options?: NdefListenerOptions): Promise<void>
 ```
 
 ##### TypeScript
@@ -178,7 +97,7 @@ nfc.setOnNdefDiscoveredListener(null).then(() => {
 });
 ```
 
-### `setOnTagDiscoveredListener` (Android only)
+### `Nfc.setOnTagDiscoveredListener`
 You may want to get notified when an NFC tag was discovered.
 You can pass in a callback function that gets invoked when that is the case.
 
@@ -187,15 +106,8 @@ but through `setOnNdefDiscoveredListener` instead.
 
 See the [definition of NfcTagData](https://github.com/ontrackms/nativescript-nfc/blob/master/nfc.common.d.ts#L14-L17) to learn what is returned to the callback function.
 
-##### JavaScript
-```js
-nfc.setOnTagDiscoveredListener(function(data) {
-  console.log("Discovered a tag with ID " + data.id);
-}).then(
-  function() {
-    console.log("OnTagDiscovered listener added");
-  }
-);
+```ts
+setOnTagDiscoveredListener(callback: (data: NfcTagData) => void): Promise<void>
 ```
 
 ##### TypeScript
@@ -285,6 +197,17 @@ You first need to "discover" it with `setOnTagDiscoveredListener` (see below). W
 ### Writing to a non-empty tag
 Same as above, but discovery is done through `setOnNdefDiscoveredListener`.
 
+## Demo app (those screenshots above)
+Want to dive in quickly? Check out [the demo](https://github.com/EddyVerbruggen/nativescript-nfc/tree/master/demo)!
+
+You can run the demo app from the root of the project by typing `npm run demo.ios.device` or `npm run demo.android`.
+
+> [This is what it looks like in action on iOS](https://twitter.com/eddyverbruggen/status/899617497741185025)!
+
 ## Future work
 * Peer to peer communication between two NFC-enabled devices.
 * Support for writing other types in addition to 'text' and 'uri'.
+  
+[0]: https://www.npmjs.com/package/@ontrackms/nativescript-nfc
+[1]: https://github.com/ontrackms/nativescript-nfc?tab=MIT-1-ov-file
+[2]: https://ontrackms.com
