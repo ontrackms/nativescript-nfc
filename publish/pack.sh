@@ -28,7 +28,7 @@ pack() {
     # compile package and copy files required by npm
     echo 'Building /src...'
     cd "$TO_SOURCE_DIR"
-    node_modules/.bin/tsc
+    npm run build # node_modules/.bin/tsc --skipLibCheck
     cd ..
 
     echo 'Creating package...'
