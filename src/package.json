@@ -1,6 +1,6 @@
 {
   "name": "@ontrackms/nativescript-nfc",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "NFC plugin for your NativeScript app",
   "main": "nfc",
   "typings": "index.d.ts",
