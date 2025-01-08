@@ -1,38 +1,40 @@
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "target": "es5",
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
-        "noEmitHelpers": true,
-        "noEmitOnError": true,
-        "declaration": true,
-        "lib": [
-            "es6",
-            "ES2021.WeakRef",
-            "dom"
-        ],
-        "baseUrl": ".",
-        "typeRoots": ["node_modules/@nativescript/types"],
-        "paths": {
-            "*": [
-                "./node_modules/tns-core-modules/*",
-                "./node_modules/*"
-            ],
-            "~/*": [
-                "app/*"
-            ]
-        }
-    },
-    "plugins": [
-      {
-        "transform": "@nativescript/webpack/transformers/ns-transform-native-classes",
-        "type": "raw"
-      }
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "noEmitHelpers": true,
+    "noEmitOnError": true,
+    "declaration": true,
+    "lib": [
+      "es6",
+      "ES2021.WeakRef",
+      "dom"
     ],
-    "exclude": [
-        "node_modules",
-        "platforms",
-        "**/*.aot.ts"
-    ]
+    "baseUrl": ".",
+    "typeRoots": [
+      "node_modules/@nativescript/types"
+    ],
+    "paths": {
+      "*": [
+        "./node_modules/tns-core-modules/*",
+        "./node_modules/*"
+      ],
+      "~/*": [
+        "app/*"
+      ]
+    }
+  },
+  "plugins": [
+    {
+      "transform": "@nativescript/webpack/transformers/ns-transform-native-classes",
+      "type": "raw"
+    }
+  ],
+  "exclude": [
+    "node_modules",
+    "platforms",
+    "**/*.aot.ts"
+  ]
 }

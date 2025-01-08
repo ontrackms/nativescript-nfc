@@ -11,7 +11,8 @@
     }
   },
   "scripts": {
-    "build": "npm i && ./node_modules/.bin/tsc --skipLibCheck",
+    "build": "npm i && tsc --skipLibCheck",
+    "prebuild": "del ./dist/",
     "demo.ios": "npm run build && cd ../demo && tns run ios",
     "demo.ios.bundle": "npm run build && cd ../demo && tns run ios --bundle",
     "demo.android": "npm run build && cd ../demo && tns run android",
@@ -28,7 +29,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/EddyVerbruggen/nativescript-nfc.git"
+    "url": "https://github.com/ontrackms/nativescript-dotenv.git"
   },
   "keywords": [
     "ecosystem:NativeScript",
@@ -54,6 +55,7 @@
     "@nativescript/core": "8.8.6",
     "@nativescript/webpack": "5.0.22",
     "@nativescript/types": "8.8.0",
+    "del-cli": "^5.0.0",
     "typescript": "~5.6.3",
     "rimraf": "^2.5.0",
     "tslint": "^5.0.0"
