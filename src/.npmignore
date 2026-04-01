@@ -1,4 +1,5 @@
 *.map
+*.sh
 *.ts
 !*.d.ts
 references.d.ts

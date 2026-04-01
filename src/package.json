@@ -1,6 +1,6 @@
 {
   "name": "@ontrackms/nativescript-nfc",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "NativeScript plugin to discover, read, and write NFC tags",
   "main": "nfc",
   "typings": "index.d.ts",
@@ -12,7 +12,7 @@
   },
   "scripts": {
     "build": "npm i && tsc --skipLibCheck",
-    "prebuild": "del ./dist/",
+    "prebuild": "rm -r ./dist/ 2>/dev/null || true",
     "demo.ios": "npm run build && cd ../demo && tns run ios",
     "demo.ios.bundle": "npm run build && cd ../demo && tns run ios --bundle",
     "demo.android": "npm run build && cd ../demo && tns run android",
@@ -57,14 +57,14 @@
   "readmeFilename": "README.md",
   "devDependencies": {
     "@nativescript/android": "8.5.0",
-    "@nativescript/ios": "8.7.2",
     "@nativescript/core": "8.8.6",
+    "@nativescript/ios": "8.7.2",
+    "@nativescript/types": "^8.8.6",
     "@nativescript/webpack": "5.0.22",
-    "@nativescript/types": "8.8.0",
     "del-cli": "^5.0.0",
-    "typescript": "~5.6.3",
     "rimraf": "^2.5.0",
-    "tslint": "^5.0.0"
+    "tslint": "^5.0.0",
+    "typescript": "~5.6.3"
   },
   "bootstrapper": "nativescript-plugin-seed"
 }
